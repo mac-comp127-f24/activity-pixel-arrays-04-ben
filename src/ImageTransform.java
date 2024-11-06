@@ -2,26 +2,36 @@ import java.util.Scanner;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.Image.PixelFormat;
 
 public class ImageTransform {
 
     public static Image lighten(Image srcImage) {
-        // TODO: Task 1
+        float[] pixels = srcImage.toFloatArray(PixelFormat.RGB);
+        for (int i = 0; i < pixels.length; i++){
+            pixels[i] = 3f*pixels[i];
+        }
 
-        throw new UnsupportedOperationException("Method not yet defined");
+        return new Image((int)srcImage.getWidth(), (int)srcImage.getHeight(), pixels, PixelFormat.RGB);
     }
 
 
     public static Image greenShift(Image srcImage) {
-        // TODO: Task 2
+        float[] pixels = srcImage.toFloatArray(PixelFormat.RGB);
+        for (int i = 1; i < pixels.length; i += 3){
+            pixels[i] = 2f*pixels[i];
+        }
 
-        throw new UnsupportedOperationException("Method not yet defined");
+        return new Image((int)srcImage.getWidth(), (int)srcImage.getHeight(), pixels, PixelFormat.RGB);
     }
 
     public static Image invert(Image srcImage) {
-        // TODO: Task 3
+        byte[] pixels = srcImage.toByteArray(PixelFormat.RGB);
+        for (int i = 0; i < pixels.length; i++){
+            pixels[i] = (byte)(255 - pixels[i]);
+        }
 
-        throw new UnsupportedOperationException("Method not yet defined");
+        return new Image((int)srcImage.getWidth(), (int)srcImage.getHeight(), pixels, PixelFormat.RGB);
     }
 
     public static void main(String[] args) {
